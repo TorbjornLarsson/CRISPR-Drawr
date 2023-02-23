@@ -7,6 +7,7 @@ TBD
 ## Setup instructions:
 
 Prerequisites: Make sure you have Python>=3.8 installed. 
+
 Then install dependencies with:
 `pip install -r requirements.txt`
 
