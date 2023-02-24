@@ -12,12 +12,12 @@ import numpy as np
 try:
     # Main code 
     print("-------------------------------------\n")
-    print("CRISPR-Drawr v1 [Februrary, 2023]\n")
+    print("CRISPR-Drawr v1 [February, 2023]\n")
     print("SciLifeLab\n")
     print("Torbjörn Larsson\n")
     print("-------------------------------------\n")
 
 except: # catch *all* exceptions
     e = sys.exc_info()[0]
-    write_to_page( "<p>Error: %s</p>" % e )
+    print("Error: %s" % e )
     logging.exception("message")
