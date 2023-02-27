@@ -2,3 +2,4 @@ sys
 logging
 click
 numpy
+Bio
