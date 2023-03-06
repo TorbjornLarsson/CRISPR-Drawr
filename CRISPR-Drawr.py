@@ -46,7 +46,7 @@ def get_sORF(**kwargs):
     strand = '{0}'.format(kwargs['strand'])
 
     server = "https://rest.ensembl.org"
-     ext = "/sequence/region/human/"+chr+":"+start+".."+stop+":"+str(strand)+"?mask=hard"
+    ext = "/sequence/region/human/"+chr+":"+start+".."+stop+":"+str(strand)+"?mask=hard"
     r = requests.get(server+ext, headers={ "Content-Type" : "text/x-fasta"})
  
     if not r.ok:
@@ -54,6 +54,31 @@ def get_sORF(**kwargs):
         sys.exit()
  
     print(r.text)
+
+@greet.command()
+@click.option('--strand', default=1, help='strand orientation 1/-1', show_default=True)
+@click.option('--pad', default=2000, help='padding length [nt]', show_default=True)
+@click.argument('chr')
+@click.argument('start')
+@click.argument('stop')
+def get_arms(**kwargs):
+    chr = '{0}'.format(kwargs['chr'])
+    start = '{0}'.format(kwargs['start'])
+    stop = '{0}'.format(kwargs['stop'])
+    strand = '{0}'.format(kwargs['strand'])
+    pad = '{0}'.format(kwargs['pad'])
+    server = "https://rest.ensembl.org"
+    ext = "/sequence/region/human/"+chr+":"+start+".."+stop+":"+str(strand)\
+        +"?expand_5prime="+str(pad)+";expand_3prime="+str(pad)+";mask=hard"
+    
+    r = requests.get(server+ext, headers={ "Content-Type" : "text/x-fasta"})
+ 
+    if not r.ok:
+        r.raise_for_status()
+        sys.exit()
+ 
+    print(r.text[1:100])
+
 
 if __name__ == '__main__':
     greet()
