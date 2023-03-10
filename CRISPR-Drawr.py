@@ -14,7 +14,7 @@ from Bio import SeqIO
 now = datetime.datetime.now()
 tnow = now.strftime("%y%m%d_%H_%M_%S")
 
-logging.basicConfig(filename='example.log', level=logging.DEBUG)
+logging.basicConfig(filename='example.log', level=logging.INFO)
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 @click.group(context_settings=CONTEXT_SETTINGS)
@@ -53,13 +53,21 @@ def get_sORF(**kwargs):
 
     server = "https://rest.ensembl.org"
     ext = "/sequence/region/human/"+chr+":"+start+".."+stop+":"+str(strand)+"?mask=hard"
-    r = requests.get(server+ext, headers={ "Content-Type" : "text/x-fasta"})
+    r = requests.get(server+ext, headers={ "Content-Type" : "text/plain"})
  
     if not r.ok:
         r.raise_for_status()
         sys.exit()
  
     print(r.text)
+    filename = '_'.join([tnow,'chr',chr,start,stop,'strand',str(strand)])
+    filename = filename+'.fa'
+    print(filename)
+    f = open(filename, 'x')
+    f.write(r.text)
+    #f.write('\n')
+    f.close()
+
 
 @greet.command()
 @click.option('--strand', default=1, help='strand orientation 1/-1', show_default=True)
@@ -68,6 +76,7 @@ def get_sORF(**kwargs):
 @click.argument('start')
 @click.argument('stop')
 def get_arms(**kwargs):
+    logging.info(tnow)
     logging.info('get_arms')
     logging.info(kwargs)
     chr = '{0}'.format(kwargs['chr'])
@@ -79,7 +88,7 @@ def get_arms(**kwargs):
     ext = "/sequence/region/human/"+chr+":"+start+".."+stop+":"+str(strand)\
         +"?expand_5prime="+str(pad)+";expand_3prime="+str(pad)+";mask=hard"
     
-    r = requests.get(server+ext, headers={ "Content-Type" : "text/plain"})
+    r = requests.get(server+ext, headers={ "Content-Type" : "text/x-fasta"})
  
     if not r.ok:
         r.raise_for_status()
@@ -94,5 +103,6 @@ def get_arms(**kwargs):
     f.write('\n')
     f.close()
 
+# ----------- MAIN --------------
 if __name__ == '__main__':
     greet()
