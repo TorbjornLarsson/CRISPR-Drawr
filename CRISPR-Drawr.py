@@ -10,9 +10,14 @@ import requests
 import click
 #import numpy as np
 from Bio import SeqIO
+from pynat import get_ip_info
+import paramiko
+import scp
 
 now = datetime.datetime.now()
 tnow = now.strftime("%y%m%d_%H_%M_%S")
+
+ip_info = get_ip_info()
 
 logging.basicConfig(filename='example.log', level=logging.INFO)
 
@@ -65,7 +70,6 @@ def get_sORF(**kwargs):
     print(filename)
     f = open(filename, 'x')
     f.write(r.text)
-    #f.write('\n')
     f.close()
 
 
@@ -103,6 +107,84 @@ def get_arms(**kwargs):
     f.write('\n')
     f.close()
 
+@greet.command()
+@click.option('--outdirectory', default='', help='path', show_default=True)
+@click.argument('infile')
+
+def get_guides_primers(**kwargs):
+    logging.info(tnow)
+    logging.info('get_guides_primers')
+    logging.info(kwargs)
+    infile = '{0}'.format(kwargs['infile'])
+    out_path = '{0}'.format(kwargs['outdirectory'])
+    base_path = '/var/www/html/temp'
+
+    # Connect
+    ssh_client = paramiko.SSHClient()
+    ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    ssh_client.connect(ip_info[1], port=2222, username='crispor', password='crispor')
+    scp_client = scp.SCPClient(ssh_client.get_transport())
+
+    # Execute the commands in series, each will finish before the next starts
+    # 1. Move the infile to remote temp and close the scp client
+    scp_client.put(infile, remote_path=base_path)
+    scp_client.close()
+
+    # 2. Run command
+    # For tests we run sacCer3    
+    _stdin, _stdout, _stderr = ssh_client.exec_command('python /var/www/html/crispor.py sacCer3 '+base_path+'/'+infile+' '+base_path+'/out.tsv')
+    # cmd_text = 'python /var/www/html/crispor.py hg38 '\
+    #     +base_path+'/'+infile+' '\
+    #     +base_path+'/out.tsv '\
+    #     +'-o '+base_path+'/offtargets.tsv '\
+    #     +'--satMutDir='+base_path+'/SATMUTDIR'
+    # _stdin, _stdout, _stderr = ssh_client.exec_command(cmd_text)
+
+    # Print output of command. Will wait for command to finish.
+    print(f'STDOUT: {_stdout.read().decode("utf8")}')
+    print(f'STDERR: {_stderr.read().decode("utf8")}')
+
+    # Get return code from command (0 is default for success)
+    print(f'Return code: {_stdout.channel.recv_exit_status()}')
+
+    # Because they are file objects, they need to be closed
+    _stdin.close()
+    _stdout.close()
+    _stderr.close()
+
+    #3. Fetch outfile with a new scp client
+    scp_client = scp.SCPClient(ssh_client.get_transport())
+    scp_client.get(base_path+'/out.tsv', local_path=out_path)
+    scp_client.get(base_path+'/offtargets.tsv', local_path=out_path)
+    scp_client.get(base_path+'/SATMUTDIR', recursive=True, local_path=out_path)
+
+    # Close the clients
+    scp_client.close()
+    ssh_client.close()
+
+    # chr = '{0}'.format(kwargs['chr'])
+    # start = '{0}'.format(kwargs['start'])
+    # stop = '{0}'.format(kwargs['stop'])
+    # strand = '{0}'.format(kwargs['strand'])
+    # pad = '{0}'.format(kwargs['pad'])
+    # server = "https://rest.ensembl.org"
+    # ext = "/sequence/region/human/"+chr+":"+start+".."+stop+":"+str(strand)\
+    #     +"?expand_5prime="+str(pad)+";expand_3prime="+str(pad)+";mask=hard"
+    
+    # r = requests.get(server+ext, headers={ "Content-Type" : "text/x-fasta"})
+ 
+    # if not r.ok:
+    #     r.raise_for_status()
+    #     sys.exit()
+ 
+    # print(r.text[1:100])
+    # filename = '_'.join([tnow,'chr',chr,start,stop,'strand',str(strand),'pad',str(pad)])
+    # filename = filename+'.fna'
+    # print(filename)
+    # f = open(filename, 'x')
+    # f.write(r.text)
+    # f.write('\n')
+    # f.close()
 # ----------- MAIN --------------
 if __name__ == '__main__':
     greet()

@@ -4,8 +4,9 @@
 # mostly left in.
 
 # Test extracting the DHCP address
-import pynat
-ip_info = pynat.get_ip_info()
+#import pynat
+from pynat import get_ip_info
+ip_info = get_ip_info()
 print(ip_info)
 print(ip_info[1])
 
@@ -21,7 +22,7 @@ ssh = paramiko.SSHClient() #SSHClient() is the paramiko object</n>
 
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-#ssh.connect('130.229.141.158', port=2222, username='crispor', password='crispor')
+#ssh.connect('192.168.1.69', port=2222, username='crispor', password='crispor')
 ssh.connect(ip_info[1], port=2222, username='crispor', password='crispor')
 
 #time.sleep(5)
@@ -131,11 +132,12 @@ client = paramiko.SSHClient()
 #client.load_system_host_keys(None)
 #client.set_missing_host_key_policy(None)
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-#client.connect('130.229.141.158', port=2222, username='crispor', password='crispor')
+#client.connect('192.168.1.69', port=2222, username='crispor', password='crispor')
 client.connect(ip_info[1], port=2222, username='crispor', password='crispor')
 
 # Run a command (execute PHP interpreter)
-_stdin, _stdout, _stderr = client.exec_command('ls')
+#_stdin, _stdout, _stderr = client.exec_command('ls')
+_stdin, _stdout, _stderr = client.exec_command('python /var/www/html/crispor.py')
 print(type(_stdin))  # <class 'paramiko.channel.ChannelStdinFile'>
 print(type(_stdout))  # <class 'paramiko.channel.ChannelFile'>
 print(type(_stderr))  # <class 'paramiko.channel.ChannelStderrFile'>
@@ -155,5 +157,16 @@ _stderr.close()
 # Close the client itself
 client.close()
 
+# Testing ssh scp in paramiko
+from paramiko import SSHClient
+from scp import SCPClient
 
-
+with SSHClient() as ssh:
+    #ssh.load_system_host_keys()
+    #ssh.connect('example.com')
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    ssh.connect(ip_info[1], port=2222, username='crispor', password='crispor')
+    
+    with SCPClient(ssh.get_transport()) as scp:
+        #scp.put('test.txt', remote_path='/var/www/html/temp')
+        scp.get('/var/www/html/temp/test.txt')

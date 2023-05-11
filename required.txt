@@ -1,5 +1,9 @@
 sys
+datetime
 logging
+requests
 click
-numpy
 Bio
+pynat
+paramiko
+scp
