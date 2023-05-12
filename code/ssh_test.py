@@ -10,6 +10,17 @@ ip_info = get_ip_info()
 print(ip_info)
 print(ip_info[1])
 
+# from subprocess import check_output
+# print(check_output("ipconfig.exe | grep IPv4 | cut -d: -f2", shell=True).decode())
+# result=check_output("ipconfig.exe", shell=True).decode().lower()
+# print(result)
+# scan=0
+# for i in result.split('\n'):
+#     if 'wifi' in i: scan=1
+#     if scan:
+#         if 'ipv4' in i: print(i.split(':')[1].strip())
+
+
 import paramiko
 
 #import time
