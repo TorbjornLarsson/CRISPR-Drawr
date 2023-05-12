@@ -1,7 +1,7 @@
 """CRISPR-Drawr docstring."""
 # -*- coding: UTF-8 -*-
 
-# Summary: TBD
+# Summary: A tool to design mutagenic primer.
 
 import sys
 import datetime
@@ -13,13 +13,15 @@ from Bio import SeqIO
 from pynat import get_ip_info
 import paramiko
 import scp
+import os
+from shutil import copyfile
 
 now = datetime.datetime.now()
 tnow = now.strftime("%y%m%d_%H_%M_%S")
 
-ip_info = get_ip_info()
+ip_info = get_ip_info()[1]
 
-logging.basicConfig(filename='example.log', level=logging.INFO)
+logging.basicConfig(filename='crispr_drawr.log', level=logging.INFO)
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 @click.group(context_settings=CONTEXT_SETTINGS)
@@ -108,31 +110,39 @@ def get_arms(**kwargs):
     f.close()
 
 @greet.command()
-@click.option('--outdirectory', default='', help='path', show_default=True)
+@click.option('--o', '--output_path', default='', help='output directory path', show_default=True)
 @click.argument('infile')
 
 def get_guides_primers(**kwargs):
     logging.info(tnow)
     logging.info('get_guides_primers')
     logging.info(kwargs)
-    infile = '{0}'.format(kwargs['infile'])
-    out_path = '{0}'.format(kwargs['outdirectory'])
+    fpath = '{0}'.format(kwargs['infile'])
+    fname = os.path.basename(fpath)
+    tempflag = 0
+    if fname is not fpath:
+        tempflag = 1
+        copyfile(fpath,fname)
+
+    out_path = '{0}'.format(kwargs['o'])
     base_path = '/var/www/html/temp'
 
     # Connect
     ssh_client = paramiko.SSHClient()
     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh_client.connect(ip_info[1], port=2222, username='crispor', password='crispor')
+    ssh_client.connect(ip_info, port=2222, username='crispor', password='crispor')
     scp_client = scp.SCPClient(ssh_client.get_transport())
 
     # Execute the commands in series, each will finish before the next starts
     # 1. Move the infile to remote temp and close the scp client
-    scp_client.put(infile, remote_path=base_path)
+    scp_client.put(fname, remote_path=base_path)
     scp_client.close()
+    if tempflag == 1:
+        os.remove(fname)
 
     # 2. Run command
     # For tests we run sacCer3    
-    _stdin, _stdout, _stderr = ssh_client.exec_command('python /var/www/html/crispor.py sacCer3 '+base_path+'/'+infile+' '+base_path+'/out.tsv')
+    _stdin, _stdout, _stderr = ssh_client.exec_command('python /var/www/html/crispor.py sacCer3 '+base_path+'/'+fname+' '+base_path+'/out.tsv')
     # cmd_text = 'python /var/www/html/crispor.py hg38 '\
     #     +base_path+'/'+infile+' '\
     #     +base_path+'/out.tsv '\
@@ -162,29 +172,6 @@ def get_guides_primers(**kwargs):
     scp_client.close()
     ssh_client.close()
 
-    # chr = '{0}'.format(kwargs['chr'])
-    # start = '{0}'.format(kwargs['start'])
-    # stop = '{0}'.format(kwargs['stop'])
-    # strand = '{0}'.format(kwargs['strand'])
-    # pad = '{0}'.format(kwargs['pad'])
-    # server = "https://rest.ensembl.org"
-    # ext = "/sequence/region/human/"+chr+":"+start+".."+stop+":"+str(strand)\
-    #     +"?expand_5prime="+str(pad)+";expand_3prime="+str(pad)+";mask=hard"
-    
-    # r = requests.get(server+ext, headers={ "Content-Type" : "text/x-fasta"})
- 
-    # if not r.ok:
-    #     r.raise_for_status()
-    #     sys.exit()
- 
-    # print(r.text[1:100])
-    # filename = '_'.join([tnow,'chr',chr,start,stop,'strand',str(strand),'pad',str(pad)])
-    # filename = filename+'.fna'
-    # print(filename)
-    # f = open(filename, 'x')
-    # f.write(r.text)
-    # f.write('\n')
-    # f.close()
 # ----------- MAIN --------------
 if __name__ == '__main__':
     greet()
