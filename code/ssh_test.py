@@ -33,8 +33,8 @@ ssh = paramiko.SSHClient() #SSHClient() is the paramiko object</n>
 
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-#ssh.connect('192.168.1.69', port=2222, username='crispor', password='crispor')
-ssh.connect(ip_info[1], port=2222, username='crispor', password='crispor')
+ssh.connect('130.229.147.84', port=2222, username='crispor', password='crispor')
+#ssh.connect(ip_info[1], port=2222, username='crispor', password='crispor')
 
 #time.sleep(5)
 

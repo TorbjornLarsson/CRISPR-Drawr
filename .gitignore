@@ -130,9 +130,12 @@ dmypy.json
 
 # Development
 *.code-workspace
+*.dev
 *.fa
 *.faa
 *.ffn
 *.fna
 *.gbk
-*.dev
+*.bed
+*.tsv
+

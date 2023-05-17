@@ -9,3 +9,5 @@ paramiko
 scp
 os
 shutil
+pandas
+numpy
