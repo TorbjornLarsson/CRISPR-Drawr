@@ -20,7 +20,8 @@ import numpy as np
 now = datetime.datetime.now()
 tnow = now.strftime("%y%m%d_%H_%M_%S")
 
-ip_info = get_ip_info()[1]
+#ip_info = get_ip_info()[1]
+ip_info = '192.168.1.69'
 
 logging.basicConfig(filename='crispr_drawr.log', level=logging.INFO)
 
@@ -138,102 +139,138 @@ def get_guides_primers(**kwargs):
         tempflag = 1
         copyfile(fpath,fname)
 
-    out_path = '{0}'.format(kwargs['o'])
-    base_path = '/var/www/html/temp'
+    host_out_path = '{0}'.format(kwargs['o'])
+    guest_base_path = '/var/www/html/temp'
 
-    # Connect
-    ssh_client = paramiko.SSHClient()
-    ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh_client.connect(ip_info, port=2222, username='crispor', password='crispor')
-    scp_client = scp.SCPClient(ssh_client.get_transport())
+    def run_file():
+        # Connect, clear the cashes and create the SATMUTDIR out directory
+        ssh_client = paramiko.SSHClient()
+        ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh_client.connect(ip_info, port=2222, username='crispor', password='crispor')
+        scp_client = scp.SCPClient(ssh_client.get_transport())
+        _stdin, _stdout, _stderr = ssh_client.exec_command('sudo -S <<< "crispor" sh -c $"echo 1 > /proc/sys/vm/drop_caches"')
+        guest_in_path = guest_base_path+'/'+fname
+        guest_out_path = guest_base_path+'/'+tnow+'_'+fname+'_out.tsv'
+        guest_offtargets_path = guest_base_path+'/'+tnow+'_'+fname+'_offtargets.tsv'
+        satmut_dir = guest_base_path+'/'+tnow+'_'+fname+'_SATMUTDIR'
+        _stdin, _stdout, _stderr = ssh_client.exec_command('mkdir '+satmut_dir)
 
-    # Execute the commands in series, each will finish before the next starts
-    # 1. Move the infile to remote temp and close the scp client
-    scp_client.put(fname, remote_path=base_path)
-    scp_client.close()
-    if tempflag == 1:
-        os.remove(fname)
+        # Execute the commands in series, each will finish before the next starts
+        # 1. Create the SATMUTDIR and close the scp client
+        
+        scp_client.put(fname, remote_path=guest_base_path)
+        scp_client.close()
+        if tempflag == 1:
+            os.remove(fname)
 
-    # 2. Run command
-    # For tests we run sacCer3    
-    # _stdin, _stdout, _stderr = ssh_client.exec_command('python /var/www/html/crispor.py sacCer3 '+base_path+'/'+fname+' '+base_path+'/'+tnow+'_out.tsv')
-    cmd_text = 'python /var/www/html/crispor.py hg38 '\
-        +base_path+'/'+fname+' '\
-        +base_path+'/'+tnow+'_out.tsv '\
-        +'-o '+base_path+'/'+tnow+'_offtargets.tsv '\
-        +'--satMutDir='+base_path+'/'+tnow+'_SATMUTDIR'
-    _stdin, _stdout, _stderr = ssh_client.exec_command(cmd_text)
+        # 2. Run command
+        # For tests we run sacCer3    
+        # _stdin, _stdout, _stderr = ssh_client.exec_command('python /var/www/html/crispor.py sacCer3 ' +base_path+'/'+fname+' '+out_file)
+        cmd_text = 'python /var/www/html/crispor.py hg38 '\
+            +guest_in_path+' '\
+            +guest_out_path+' '\
+            +'-o '+guest_offtargets_path+' '\
+            +'--satMutDir='+satmut_dir
+        print(cmd_text)
+        _stdin, _stdout, _stderr = ssh_client.exec_command(cmd_text)
 
-    # Print output of command. Will wait for command to finish.
-    logging.info(_stdout.read().decode("utf8"))
-    logging.info(_stderr.read().decode("utf8"))
- 
-    # Get return code from command (0 is default for success)
-    print(f'Return code: {_stdout.channel.recv_exit_status()}')
+        # Print output of command. Will wait for command to finish.
+        logging.info(_stdout.read().decode("utf8"))
+        logging.info(_stderr.read().decode("utf8"))
 
-    # Because they are file objects, they need to be closed
-    _stdin.close()
-    _stdout.close()
-    _stderr.close()
+        # Get return code from command (0 is default for success)
+        print(f'Return code: {_stdout.channel.recv_exit_status()}')
 
-    #3. Fetch outfile with a new scp client
-    scp_client = scp.SCPClient(ssh_client.get_transport())
-    scp_client.get(base_path+'/'+tnow+'_out.tsv', local_path=out_path)
-    scp_client.get(base_path+'/'+tnow+'_offtargets.tsv', local_path=out_path)
-    scp_client.get(base_path+'/'+tnow+'_SATMUTDIR', recursive=True, local_path=out_path)
+        # Because they are file objects, they need to be closed
+        _stdin.close()
+        _stdout.close()
+        _stderr.close()
 
-    # Close the clients
-    scp_client.close()
-    ssh_client.close()
+        #3. Fetch outfiles with a new scp client
+        scp_client = scp.SCPClient(ssh_client.get_transport())
+        print(guest_in_path)
+        print(guest_out_path)
+        print(guest_offtargets_path)
+        print(satmut_dir)
+        print(host_out_path+'/'+os.path.basename(satmut_dir))
+        scp_client.get(guest_out_path, local_path=host_out_path)
+        scp_client.get(guest_offtargets_path, local_path=host_out_path)
+        scp_client.get(satmut_dir, recursive=True, local_path=host_out_path+'/'+os.path.basename(satmut_dir))
+        scp_client.close()
+        
+        # and erase all files after
+        _stdin, _stdout, _stderr = ssh_client.exec_command('rm '+guest_in_path)
+        _stdin, _stdout, _stderr = ssh_client.exec_command('rm '+guest_out_path)
+        _stdin, _stdout, _stderr = ssh_client.exec_command('rm '+guest_offtargets_path)
+        _stdin, _stdout, _stderr = ssh_client.exec_command('rm -rf '+satmut_dir)
 
-    # Parse and add snr score to outfile
-    ontargets_df=pd.read_csv(out_path+'/'+tnow+'_out.tsv', sep="\t")
-    labels=ontargets_df.columns.tolist()
-    labels.append('')
-    ontargets_df=pd.read_table(out_path+'/'+tnow+'_out.tsv', header=None,names=labels,skiprows=1)
-    guides = np.unique(ontargets_df['guideId'])
-    
-    # First get signal as specificity scores
-    signalscore=[]
-    for guide in guides:
-         signalscore.append(np.float64(ontargets_df.loc[offtargets_df['guideId'] == guide]['mitSpecScore']))
-    
-    # Then get sum of squares of off target specificity noise scores 
-    offtargets_df=pd.read_table(out_path+'/'+tnow+'_offtargets.tsv')
-    noisescore=[]
-    for guide in guides:
-        noisescore.append(np.square(offtargets_df.loc[offtargets_df['guideId'] == guide]['cfdOfftargetScore']).sum())
-    
-    # Now get snr score with specificity scores as amplitudes
-    snrscore=[]
-    i = 0
-    for score in signalscore[0]:
-        snrscore.append(score**2/noisescore[i])
-        i += 1
-    
-    # Add column and replace guidefile
-    ontargets_df['snrScore'] = snrscore
-    ontargets_df.to_csv(out_path+'/'+tnow+'_out.tsv', sep = '\t', index=False)
+        # Close the client
+        ssh_client.close()
 
-    # Make design matrix over guides and primers
-    # First sort the two dataframes on guides and make the design matrix.
-    # Then sort priority according to snr score.
-    header_list = ['#seqId', 'guideId', 'targetSeq', 'snrScore']
-    design_df = ontargets_df[header_list].copy()
-    primers_df = pd.read_table(out_path+'/'+tnow+'_SATMUTDIR/'+tnow+'_ontargetPrimers.tsv')
- 
-    design_df.sort_values(by='guideId', inplace=True)
-    primers_df.sort_values(by='#guideId', inplace=True)
+        # Parse and add snr score to outfile
+        out_name = os.path.basename(guest_out_path)
+        ontargets_df=pd.read_csv(host_out_path+'/'+out_name, sep="\t")
+        labels=ontargets_df.columns.tolist()
+        labels.append('')
+        ontargets_df=pd.read_table(host_out_path+'/'+out_name, header=None, names=labels, skiprows=1)
+        guides = np.unique(ontargets_df['guideId'])
 
-    header_list = header_list + ['forwardPrimer', 'leftPrimerTm', 'revPrimer', 'revPrimerTm']
-    design_df = design_df.reindex(columns = header_list) 
-    design_df['forwardPrimer'] = primers_df['forwardPrimer']
-    design_df['leftPrimerTm'] = primers_df['leftPrimerTm']
-    design_df['revPrimer'] = primers_df['revPrimer']
-    design_df['revPrimerTm'] = primers_df['revPrimerTm']
-    
-    design_df.sort_values(by='snr', ascending=False, inplace=True)
-    design_df.to_csv(out_path+'/'+tnow+'_designtable.tsv', sep = '\t', index=False)
+        # First get signal as specificity scores
+        signalscore=[]
+        for guide in guides:
+                signalscore.append(np.float64(ontargets_df.loc[offtargets_df['guideId'] == guide]['mitSpecScore']))
+
+        # Then get sum of squares of off target specificity noise scores
+        offtargets_name = os.path.basename(guest_offtargets_path)
+        offtargets_df=pd.read_table(host_out_path+'/'+offtargets_name)
+        noisescore=[]
+        for guide in guides:
+            noisescore.append(np.square(offtargets_df.loc[offtargets_df['guideId'] == guide]['cfdOfftargetScore']).sum())
+
+        # Now get snr score with specificity scores as amplitudes
+        snrscore=[]
+        i = 0
+        for score in signalscore[0]:
+            snrscore.append(score**2/noisescore[i])
+            i += 1
+
+        # Add column and replace guidefile
+        ontargets_df['snrScore'] = snrscore
+        ontargets_df.to_csv(host_out_path+'/'+out_name, sep = '\t', index=False)
+
+        # Make design matrix over guides and primers
+        # First sort the two dataframes on guides and make the design matrix.
+        # Then sort priority according to snr score.
+        header_list = ['#seqId', 'guideId', 'targetSeq', 'snrScore']
+        design_df = ontargets_df[header_list].copy()
+        primers_df = pd.read_table(host_out_path+'/'+satmut_dir+'/'+tnow+'_'+fname+'_ontargetPrimers.tsv')
+
+        design_df.sort_values(by='guideId', inplace=True)
+        primers_df.sort_values(by='#guideId', inplace=True)
+
+        header_list = header_list + ['forwardPrimer', 'leftPrimerTm', 'revPrimer', 'revPrimerTm']
+        design_df = design_df.reindex(columns = header_list) 
+        design_df['forwardPrimer'] = primers_df['forwardPrimer']
+        design_df['leftPrimerTm'] = primers_df['leftPrimerTm']
+        design_df['revPrimer'] = primers_df['revPrimer']
+        design_df['revPrimerTm'] = primers_df['revPrimerTm']
+
+        design_df.sort_values(by='snr', ascending=False, inplace=True)
+        design_df.to_csv(host_out_path+'/'+tnow+'_'+fname+'_designtable.tsv', sep = '\t', index=False)
+
+    if str.split(fname, sep='.')[1] == 'bed':
+        fr = open(fname, 'r')
+        Lines = fr.readlines()
+        fr.close()
+        for line in Lines:
+            fname = line.split(sep='\t')[3]+'.bed'
+            fline = open(fname, 'w')
+            fline.writelines(line)
+            fline.close()
+            run_file()
+            os.remove(fname)
+    else:
+        run_file()
 
 # ----------- MAIN --------------
 if __name__ == '__main__':

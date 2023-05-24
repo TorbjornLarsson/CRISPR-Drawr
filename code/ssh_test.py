@@ -5,6 +5,8 @@
 
 # Test extracting the DHCP address
 #import pynat
+import os
+from shutil import copyfile
 from pynat import get_ip_info
 ip_info = get_ip_info()
 print(ip_info)
@@ -33,7 +35,7 @@ ssh = paramiko.SSHClient() #SSHClient() is the paramiko object</n>
 
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-ssh.connect('130.229.147.84', port=2222, username='crispor', password='crispor')
+ssh.connect('192.168.1.69', port=2222, username='crispor', password='crispor')
 #ssh.connect(ip_info[1], port=2222, username='crispor', password='crispor')
 
 #time.sleep(5)
@@ -56,6 +58,16 @@ _stdin, _stdout,_stderr = ssh.exec_command("df")
 print(_stdout.read().decode())
 
 _stdin, _stdout, _stderr = ssh.exec_command('ls -al')
+print(_stdout.read().decode())
+
+_stdin, _stdout, _stderr = ssh.exec_command('free -h')
+print(_stdout.read().decode())
+
+# _stdin, _stdout, _stderr = ssh.exec_command('echo crispor | sudo -S sh -c "\""echo 1 > /proc/sys/vm/drop_caches')
+_stdin, _stdout, _stderr = ssh.exec_command('sudo -S <<< "crispor" sh -c $"echo 1 > /proc/sys/vm/drop_caches"')
+print(_stdout.read().decode())
+
+_stdin, _stdout, _stderr = ssh.exec_command('free -h')
 print(_stdout.read().decode())
 
 ssh.close()
@@ -138,35 +150,35 @@ ssh.close()
 
 #from paramiko import SSHClient
 
-# Connect
-client = paramiko.SSHClient()
-#client.load_system_host_keys(None)
-#client.set_missing_host_key_policy(None)
-client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-#client.connect('192.168.1.69', port=2222, username='crispor', password='crispor')
-client.connect(ip_info[1], port=2222, username='crispor', password='crispor')
+# # Connect
+# client = paramiko.SSHClient()
+# #client.load_system_host_keys(None)
+# #client.set_missing_host_key_policy(None)
+# client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+# #client.connect('192.168.1.69', port=2222, username='crispor', password='crispor')
+# client.connect(ip_info[1], port=2222, username='crispor', password='crispor')
 
-# Run a command (execute PHP interpreter)
-#_stdin, _stdout, _stderr = client.exec_command('ls')
-_stdin, _stdout, _stderr = client.exec_command('python /var/www/html/crispor.py')
-print(type(_stdin))  # <class 'paramiko.channel.ChannelStdinFile'>
-print(type(_stdout))  # <class 'paramiko.channel.ChannelFile'>
-print(type(_stderr))  # <class 'paramiko.channel.ChannelStderrFile'>
+# # Run a command (execute PHP interpreter)
+# #_stdin, _stdout, _stderr = client.exec_command('ls')
+# _stdin, _stdout, _stderr = client.exec_command('python /var/www/html/crispor.py')
+# print(type(_stdin))  # <class 'paramiko.channel.ChannelStdinFile'>
+# print(type(_stdout))  # <class 'paramiko.channel.ChannelFile'>
+# print(type(_stderr))  # <class 'paramiko.channel.ChannelStderrFile'>
 
-# Print output of command. Will wait for command to finish.
-print(f'STDOUT: {_stdout.read().decode("utf8")}')
-print(f'STDERR: {_stderr.read().decode("utf8")}')
+# # Print output of command. Will wait for command to finish.
+# print(f'STDOUT: {_stdout.read().decode("utf8")}')
+# print(f'STDERR: {_stderr.read().decode("utf8")}')
 
-# Get return code from command (0 is default for success)
-print(f'Return code: {_stdout.channel.recv_exit_status()}')
+# # Get return code from command (0 is default for success)
+# print(f'Return code: {_stdout.channel.recv_exit_status()}')
 
-# Because they are file objects, they need to be closed
-_stdin.close()
-_stdout.close()
-_stderr.close()
+# # Because they are file objects, they need to be closed
+# _stdin.close()
+# _stdout.close()
+# _stderr.close()
 
-# Close the client itself
-client.close()
+# # Close the client itself
+# client.close()
 
 # Testing ssh scp in paramiko
 from paramiko import SSHClient
@@ -176,8 +188,23 @@ with SSHClient() as ssh:
     #ssh.load_system_host_keys()
     #ssh.connect('example.com')
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect(ip_info[1], port=2222, username='crispor', password='crispor')
-    
+    #ssh.connect(ip_info[1], port=2222, username='crispor', password='crispor')
+    ssh.connect('192.168.1.69', port=2222, username='crispor', password='crispor')
+  
     with SCPClient(ssh.get_transport()) as scp:
         #scp.put('test.txt', remote_path='/var/www/html/temp')
-        scp.get('/var/www/html/temp/test.txt')
+        #scp.get('/var/www/html/temp/test.txt')
+        #scp.get('/var/www/html/temp/230522_13_57_01_out.tsv', local_path='analyses/')
+        #scp.get('/var/www/html/temp/SATMUTDIR', recursive=True, local_path='analyses/SATMUTDIR')
+        fpath = 'analyses/230523_13_44_59_hg38test.fa_out.tsv'
+        fname = 'hg38test.fa'
+        tempflag = 0
+        if fname is not fpath:
+            tempflag = 1
+            copyfile(fpath,fname)
+        host_out_path = 'analyses'
+        guest_base_path = '/var/www/html/temp'
+        guest_out_path = guest_base_path+'/'+'230523_13_44_59'+'_'+fname+'_out.tsv'
+        scp.put(fname, remote_path=guest_base_path)
+        scp.get(guest_out_path, local_path=host_out_path)
+    
