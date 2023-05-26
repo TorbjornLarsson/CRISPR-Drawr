@@ -2,8 +2,10 @@
 
 import pandas as pd
 import numpy as np
+from shutil import copyfile
 
 # Read out correctly
+copyfile('analyses/230525_00_13_23_hg38test.fa_out.tsv','test.tsv')
 tsv_df=pd.read_csv('test.tsv', sep="\t")
 #print(tsv_df)
 #print(tsv_df.columns.tolist())
@@ -17,7 +19,7 @@ ontargets_df = tsv_df
 guides = np.unique(tsv_df['guideId'])
 #print(guides)
 
-offtargets_df=pd.read_table('analyses/offtargets.tsv')
+offtargets_df=pd.read_table('analyses/230525_00_13_23_hg38test.fa_offtargets.tsv')
 #print(offtargets_df)
 #print(offtargets_df.loc[offtargets_df['guideId'] == guides[0]])
 #print(offtargets_df.loc[offtargets_df['guideId'] == guides[0]]['cfdOfftargetScore'])
@@ -28,20 +30,26 @@ for guide in guides:
     noisescore.append(np.square(offtargets_df.loc[offtargets_df['guideId'] == guide]['cfdOfftargetScore']).sum())
 print(noisescore)
 
-onscore=[]
+# onscore=[]
+# for guide in guides:
+#     #print(ontargets_df.loc[offtargets_df['guideId'] == guide]['mitSpecScore'])
+#     onscore.append(np.float64(ontargets_df.loc[offtargets_df['guideId'] == guide]['mitSpecScore']))
+# print(onscore[0])
+
+signalscore=[]
 for guide in guides:
     #print(ontargets_df.loc[offtargets_df['guideId'] == guide]['mitSpecScore'])
-    onscore.append(np.float64(ontargets_df.loc[offtargets_df['guideId'] == guide]['mitSpecScore']))
-print(onscore[0])
+    signalscore.append(np.float64(ontargets_df.loc[offtargets_df['guideId'] == guide]['mitSpecScore']))
+print(signalscore[0])
 
 snrscore=[]
 i = 0
-for score in onscore[0]:
+for score in signalscore[0]:
     snrscore.append(score**2/noisescore[i])
     i += 1
 print(snrscore)
 
-ontargets_df['snr'] = snrscore
+ontargets_df['snrScore'] = snrscore
 print(ontargets_df)
 for col in ontargets_df:
    print(ontargets_df[col])
@@ -52,7 +60,7 @@ ontargets_df.to_csv('testout.tsv', sep = '\t', index=False)
 # colkeys=ontargets_df.columns.tolist()
 # print(colkeys)
 
-header_list = ['#seqId', 'guideId', 'targetSeq', 'snr']
+header_list = ['#seqId', 'guideId', 'targetSeq', 'snrScore']
 #design_df = ontargets_df[['#seqId', 'guideId', 'targetSeq', 'snr']].copy()
 design_df = ontargets_df[header_list].copy()
 #print(design_df)
@@ -81,7 +89,8 @@ design_df['leftPrimerTm'] = primers_df['leftPrimerTm']
 design_df['revPrimer'] = primers_df['revPrimer']
 design_df['revPrimerTm'] = primers_df['revPrimerTm']
 #print(design_df)
-design_df.sort_values(by='snr', ascending=False, inplace=True)
+design_df.sort_values(by='snrScore', ascending=False, inplace=True)
 #print(design_df)
 for col in design_df:
    print(design_df[col])
+design_df.to_csv('design_table.tsv', sep = '\t', index=False)

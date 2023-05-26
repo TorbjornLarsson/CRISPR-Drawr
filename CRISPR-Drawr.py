@@ -21,6 +21,8 @@ now = datetime.datetime.now()
 tnow = now.strftime("%y%m%d_%H_%M_%S")
 
 #ip_info = get_ip_info()[1]
+# For non-eduroam usres we need to pull the ipv4 adress
+# In windows it is easy, do ipconfig /all in a terninal.
 ip_info = '192.168.1.69'
 
 logging.basicConfig(filename='crispr_drawr.log', level=logging.INFO)
@@ -171,7 +173,7 @@ def get_guides_primers(**kwargs):
             +guest_out_path+' '\
             +'-o '+guest_offtargets_path+' '\
             +'--satMutDir='+satmut_dir
-        print(cmd_text)
+        logging.info(cmd_text)
         _stdin, _stdout, _stderr = ssh_client.exec_command(cmd_text)
 
         # Print output of command. Will wait for command to finish.
@@ -188,15 +190,13 @@ def get_guides_primers(**kwargs):
 
         #3. Fetch outfiles with a new scp client
         scp_client = scp.SCPClient(ssh_client.get_transport())
-        print(guest_in_path)
-        print(guest_out_path)
-        print(guest_offtargets_path)
-        print(satmut_dir)
-        print(host_out_path+'/'+os.path.basename(satmut_dir))
         scp_client.get(guest_out_path, local_path=host_out_path)
         scp_client.get(guest_offtargets_path, local_path=host_out_path)
         scp_client.get(satmut_dir, recursive=True, local_path=host_out_path+'/'+os.path.basename(satmut_dir))
         scp_client.close()
+        logging.info('In target data: '+host_out_path+os.path.basename(guest_out_path))
+        logging.info('Off target data: '+host_out_path+os.path.basename(guest_offtargets_path))
+        logging.info('Saturation data: '+host_out_path+os.path.basename(satmut_dir))
         
         # and erase all files after
         _stdin, _stdout, _stderr = ssh_client.exec_command('rm '+guest_in_path)
@@ -215,17 +215,17 @@ def get_guides_primers(**kwargs):
         ontargets_df=pd.read_table(host_out_path+'/'+out_name, header=None, names=labels, skiprows=1)
         guides = np.unique(ontargets_df['guideId'])
 
-        # First get signal as specificity scores
-        signalscore=[]
-        for guide in guides:
-                signalscore.append(np.float64(ontargets_df.loc[offtargets_df['guideId'] == guide]['mitSpecScore']))
-
-        # Then get sum of squares of off target specificity noise scores
+        # Get sum of squares of off target specificity noise scores
         offtargets_name = os.path.basename(guest_offtargets_path)
         offtargets_df=pd.read_table(host_out_path+'/'+offtargets_name)
         noisescore=[]
         for guide in guides:
             noisescore.append(np.square(offtargets_df.loc[offtargets_df['guideId'] == guide]['cfdOfftargetScore']).sum())
+
+        # Get signal as in target specificity scores
+        signalscore=[]
+        for guide in guides:
+                signalscore.append(np.float64(ontargets_df.loc[offtargets_df['guideId'] == guide]['mitSpecScore']))
 
         # Now get snr score with specificity scores as amplitudes
         snrscore=[]
@@ -237,13 +237,14 @@ def get_guides_primers(**kwargs):
         # Add column and replace guidefile
         ontargets_df['snrScore'] = snrscore
         ontargets_df.to_csv(host_out_path+'/'+out_name, sep = '\t', index=False)
-
+        logging.info('Added snrScore to: '+host_out_path+os.path.basename(guest_out_path))
+       
         # Make design matrix over guides and primers
         # First sort the two dataframes on guides and make the design matrix.
         # Then sort priority according to snr score.
         header_list = ['#seqId', 'guideId', 'targetSeq', 'snrScore']
         design_df = ontargets_df[header_list].copy()
-        primers_df = pd.read_table(host_out_path+'/'+satmut_dir+'/'+tnow+'_'+fname+'_ontargetPrimers.tsv')
+        primers_df = pd.read_table(host_out_path+os.path.basename(satmut_dir)+'/'+tnow+'_'+fname+'_ontargetPrimers.tsv')
 
         design_df.sort_values(by='guideId', inplace=True)
         primers_df.sort_values(by='#guideId', inplace=True)
@@ -255,8 +256,10 @@ def get_guides_primers(**kwargs):
         design_df['revPrimer'] = primers_df['revPrimer']
         design_df['revPrimerTm'] = primers_df['revPrimerTm']
 
-        design_df.sort_values(by='snr', ascending=False, inplace=True)
-        design_df.to_csv(host_out_path+'/'+tnow+'_'+fname+'_designtable.tsv', sep = '\t', index=False)
+        design_df.sort_values(by='snrScore', ascending=False, inplace=True)
+        design_table_path = host_out_path+'/'+tnow+'_'+fname+'_designtable.tsv'
+        design_df.to_csv(design_table_path, sep = '\t', index=False)
+        logging.info('Added designtable: '+design_table_path)
 
     if str.split(fname, sep='.')[1] == 'bed':
         fr = open(fname, 'r')
@@ -271,6 +274,8 @@ def get_guides_primers(**kwargs):
             os.remove(fname)
     else:
         run_file()
+    
+    logging.info('Done!')
 
 # ----------- MAIN --------------
 if __name__ == '__main__':
