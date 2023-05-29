@@ -3,6 +3,8 @@
 import pandas as pd
 import numpy as np
 from shutil import copyfile
+import fnmatch
+import os
 
 # Read out correctly
 copyfile('analyses/230525_00_13_23_hg38test.fa_out.tsv','test.tsv')
@@ -64,7 +66,16 @@ header_list = ['#seqId', 'guideId', 'targetSeq', 'snrScore']
 #design_df = ontargets_df[['#seqId', 'guideId', 'targetSeq', 'snr']].copy()
 design_df = ontargets_df[header_list].copy()
 #print(design_df)
-primers_df = pd.read_table('ontargetPrimers.tsv')
+#primers_df = pd.read_table('ontargetPrimers.tsv')
+
+for file in os.listdir('analyses/230527_01_01_10_hg38test.fa_SATMUTDIR'):
+    print(file)
+    if fnmatch.fnmatch(file, '*ontargetPrimers.tsv'):
+        fpath = 'analyses/230527_01_01_10_hg38test.fa_SATMUTDIR'+'/'+file
+        primers_df = pd.read_table(fpath)
+        print(file)
+
+#primers_df = pd.read_table('ontargetPrimers.tsv')
 print(primers_df)
 
 #First sort the two dataframes on guides and make the design matrix.
