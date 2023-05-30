@@ -1,0 +1,739 @@
+INFO:root:230515_14_30_11
+INFO:root:get_arms
+INFO:root:{'chr': '11', 'start': '1678', 'stop': '1698', 'strand': 1, 'pad': 2000}
+INFO:root:230515_14_30_11_chr_11_1678_1698_strand_1_pad_2000.fna
+INFO:root:230515_14_31_52
+INFO:root:get_sORF
+INFO:root:{'chr': '11', 'start': '1678', 'stop': '1698', 'strand': 1}
+INFO:root:230515_14_31_52_chr_11_1678_1698_strand_1.fa
+INFO:root:230515_14_37_19
+INFO:root:read_fna
+INFO:root:{'file': '230515_14_30_11_chr_11_1678_1698_strand_1_pad_2000.fna'}
+INFO:root:230515_14_39_22
+INFO:root:read_gbk
+INFO:root:{'file': 'data/NC_000913.gbk'}INFO:root:230515_18_56_04
+INFO:root:get_guides_primers
+INFO:root:{'infile': 'analyses/sacCer3test.fa', 'o': ''}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:STDOUT: 
+INFO:root:STDERR: INFO:root: * running on sequence 'sacCer3 chrI:766-947 sense strand', guideLen=20, seqLen=182
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwasw - Searching genome for one 100% identical match to input sequence
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[bsw2_aln] read 1 sequences/pairs (182 bp) ...
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa bwasw -T 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/primer3InCYEAoW.txt
+[main] Real time: 0.118 sec; CPU: 0.028 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - effScores - Calculating guide efficiency scores
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - outcome - Calculating editing outcomes
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2645: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+INFO:root:Wrote eff scores to /tmp/crisporcZS9cL/RasA7QvfMxl1EMUew4PF.effScores.tab
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwa - Alignment of potential guides, mismatches <= 4
+[bwa_aln_core] calculate SA coordinate... 0.11 sec
+[bwa_aln_core] write to the disk... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporcZS9cL/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.185 sec; CPU: 0.153 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - saiToBed - Converting alignments
+[bwa_aln_core] convert to sequence coordinate... 0.01 sec
+[bwa_aln_core] refine gapped alignments... 0.00 sec
+[bwa_aln_core] print alignments... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa samse -n 60000 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporcZS9cL/RasA7QvfMxl1EMUew4PF.sa /tmp/crisporcZS9cL/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.047 sec; CPU: 0.035 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - filter - Removing matches without a PAM motif
+
+real	0m0.030s
+user	0m0.021s
+sys	0m0.007s
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - genes - Annotating matches with genes
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - done - Job completed
+INFO:root:guide info written to /var/www/html/temp/230515_18_56_04_out.tsv
+INFO:root:230520_10_17_58
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/sacCer3test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:
+INFO:root:INFO:root: * running on sequence 'sacCer3 chrI:766-947 sense strand', guideLen=20, seqLen=182
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwasw - Searching genome for one 100% identical match to input sequence
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[bsw2_aln] read 1 sequences/pairs (182 bp) ...
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa bwasw -T 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/primer3InKTzxvW.txt
+[main] Real time: 6.800 sec; CPU: 0.157 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - effScores - Calculating guide efficiency scores
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - outcome - Calculating editing outcomes
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2645: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+INFO:root:Wrote eff scores to /tmp/crisporYjUVQF/RasA7QvfMxl1EMUew4PF.effScores.tab
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwa - Alignment of potential guides, mismatches <= 4
+[bwa_aln_core] calculate SA coordinate... 0.10 sec
+[bwa_aln_core] write to the disk... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporYjUVQF/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 2.931 sec; CPU: 1.061 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - saiToBed - Converting alignments
+[bwa_aln_core] convert to sequence coordinate... 0.44 sec
+[bwa_aln_core] refine gapped alignments... 0.00 sec
+[bwa_aln_core] print alignments... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa samse -n 60000 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporYjUVQF/RasA7QvfMxl1EMUew4PF.sa /tmp/crisporYjUVQF/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 1.040 sec; CPU: 0.443 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - filter - Removing matches without a PAM motif
+
+real	0m0.337s
+user	0m0.010s
+sys	0m0.049s
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - genes - Annotating matches with genes
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - done - Job completed
+INFO:root:guide info written to /var/www/html/temp/230520_10_17_58_out.tsv
+INFO:root:230521_14_41_57
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/sacCer3test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:
+INFO:root:INFO:root: * running on sequence 'sacCer3 chrI:766-947 sense strand', guideLen=20, seqLen=182
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwasw - Searching genome for one 100% identical match to input sequence
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[bsw2_aln] read 1 sequences/pairs (182 bp) ...
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa bwasw -T 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/primer3Ind8nv4W.txt
+[main] Real time: 0.315 sec; CPU: 0.267 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - effScores - Calculating guide efficiency scores
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - outcome - Calculating editing outcomes
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2645: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+INFO:root:Wrote eff scores to /tmp/crisporH1AN25/RasA7QvfMxl1EMUew4PF.effScores.tab
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwa - Alignment of potential guides, mismatches <= 4
+[bwa_aln_core] calculate SA coordinate... 0.00 sec
+[bwa_aln_core] write to the disk... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporH1AN25/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.095 sec; CPU: 0.090 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - saiToBed - Converting alignments
+[bwa_aln_core] convert to sequence coordinate... 0.00 sec
+[bwa_aln_core] refine gapped alignments... 0.00 sec
+[bwa_aln_core] print alignments... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa samse -n 60000 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporH1AN25/RasA7QvfMxl1EMUew4PF.sa /tmp/crisporH1AN25/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.037 sec; CPU: 0.012 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - filter - Removing matches without a PAM motif
+
+real	0m0.053s
+user	0m0.006s
+sys	0m0.012s
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - genes - Annotating matches with genes
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - done - Job completed
+INFO:root:guide info written to /var/www/html/temp/230521_14_41_57_out.tsv
+
+INFO:root:230521_14_48_49
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/sacCer3test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:
+INFO:root:INFO:root: * running on sequence 'sacCer3 chrI:766-947 sense strand', guideLen=20, seqLen=182
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwasw - Searching genome for one 100% identical match to input sequence
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[bsw2_aln] read 1 sequences/pairs (182 bp) ...
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa bwasw -T 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/primer3InTTj1qN.txt
+[main] Real time: 0.034 sec; CPU: 0.033 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - effScores - Calculating guide efficiency scores
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - outcome - Calculating editing outcomes
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2645: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+INFO:root:Wrote eff scores to /tmp/crisporoW_nwN/RasA7QvfMxl1EMUew4PF.effScores.tab
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwa - Alignment of potential guides, mismatches <= 4
+[bwa_aln_core] calculate SA coordinate... 0.00 sec
+[bwa_aln_core] write to the disk... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporoW_nwN/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.104 sec; CPU: 0.028 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - saiToBed - Converting alignments
+[bwa_aln_core] convert to sequence coordinate... 0.01 sec
+[bwa_aln_core] refine gapped alignments... 0.00 sec
+[bwa_aln_core] print alignments... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa samse -n 60000 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporoW_nwN/RasA7QvfMxl1EMUew4PF.sa /tmp/crisporoW_nwN/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.026 sec; CPU: 0.012 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - filter - Removing matches without a PAM motif
+
+real	0m0.014s
+user	0m0.008s
+sys	0m0.010s
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - genes - Annotating matches with genes
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - done - Job completed
+INFO:root:guide info written to /var/www/html/temp/230521_14_48_49_out.tsv
+
+INFO:root:230521_14_52_58
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/sacCer3test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:
+INFO:root:INFO:root: * running on sequence 'sacCer3 chrI:766-947 sense strand', guideLen=20, seqLen=182
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwasw - Searching genome for one 100% identical match to input sequence
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[bsw2_aln] read 1 sequences/pairs (182 bp) ...
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa bwasw -T 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/primer3In2TBsIn.txt
+[main] Real time: 0.026 sec; CPU: 0.010 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - effScores - Calculating guide efficiency scores
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - outcome - Calculating editing outcomes
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2645: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+INFO:root:Wrote eff scores to /tmp/crisporLKdQAs/RasA7QvfMxl1EMUew4PF.effScores.tab
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwa - Alignment of potential guides, mismatches <= 4
+[bwa_aln_core] calculate SA coordinate... 0.08 sec
+[bwa_aln_core] write to the disk... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporLKdQAs/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.130 sec; CPU: 0.126 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - saiToBed - Converting alignments
+[bwa_aln_core] convert to sequence coordinate... 0.03 sec
+[bwa_aln_core] refine gapped alignments... 0.01 sec
+[bwa_aln_core] print alignments... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa samse -n 60000 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporLKdQAs/RasA7QvfMxl1EMUew4PF.sa /tmp/crisporLKdQAs/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.033 sec; CPU: 0.036 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - filter - Removing matches without a PAM motif
+
+real	0m0.015s
+user	0m0.013s
+sys	0m0.000s
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - genes - Annotating matches with genes
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - done - Job completed
+INFO:root:guide info written to /var/www/html/temp/230521_14_52_58_out.tsv
+INFO:root:230521_14_55_44
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/hg38test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:
+INFO:root:INFO:root: * running on sequence 'chromosome:GRCh38:16:67846953:67846986:1', guideLen=20, seqLen=34
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - bwasw - Searching genome for one 100% identical match to input sequence
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[bsw2_aln] read 1 sequences/pairs (34 bp) ...
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa bwasw -T 20 /var/www/html/genomes/hg38/hg38.fa /tmp/primer3InME5PcN.txt
+[main] Real time: 377.450 sec; CPU: 294.356 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - effScores - Calculating guide efficiency scores
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - outcome - Calculating editing outcomes
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2645: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+INFO:root:Wrote eff scores to /tmp/crisporWrfPSB/qx8BmCYc7lpdmeVjOtTG.effScores.tab
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - bwa - Alignment of potential guides, mismatches <= 4
+[bwa_aln_core] calculate SA coordinate... 147.93 sec
+[bwa_aln_core] write to the disk... 0.00 sec
+[bwa_aln_core] 4 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 /var/www/html/genomes/hg38/hg38.fa /tmp/crisporWrfPSB/qx8BmCYc7lpdmeVjOtTG.fa
+[main] Real time: 879.341 sec; CPU: 594.333 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - saiToBed - Converting alignments
+[bwa_aln_core] convert to sequence coordinate... 1126.64 sec
+[bwa_aln_core] refine gapped alignments... 80.98 sec
+[bwa_aln_core] print alignments... 0.05 sec
+[bwa_aln_core] 4 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa samse -n 60000 /var/www/html/genomes/hg38/hg38.fa /tmp/crisporWrfPSB/qx8BmCYc7lpdmeVjOtTG.sa /tmp/crisporWrfPSB/qx8BmCYc7lpdmeVjOtTG.fa
+[main] Real time: 1535.048 sec; CPU: 1207.869 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - filter - Removing matches without a PAM motif
+
+real	0m46.203s
+user	0m0.298s
+sys	0m3.050s
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - genes - Annotating matches with genes
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - done - Job completed
+INFO:root:guide info written to /var/www/html/temp/230521_14_55_44_out.tsv
+INFO:root:230522_13_51_46
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/sacCer3test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:
+INFO:root:INFO:root: * running on sequence 'sacCer3 chrI:766-947 sense strand', guideLen=20, seqLen=182
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwasw - Searching genome for one 100% identical match to input sequence
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[bsw2_aln] read 1 sequences/pairs (182 bp) ...
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa bwasw -T 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/primer3In3KTiLz.txt
+[main] Real time: 3.281 sec; CPU: 1.982 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - effScores - Calculating guide efficiency scores
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - outcome - Calculating editing outcomes
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2645: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+INFO:root:Wrote eff scores to /tmp/crisporTPsUCl/RasA7QvfMxl1EMUew4PF.effScores.tab
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwa - Alignment of potential guides, mismatches <= 4
+[bwa_aln_core] calculate SA coordinate... 0.17 sec
+[bwa_aln_core] write to the disk... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporTPsUCl/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.469 sec; CPU: 0.435 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - saiToBed - Converting alignments
+[bwa_aln_core] convert to sequence coordinate... 0.15 sec
+[bwa_aln_core] refine gapped alignments... 0.00 sec
+[bwa_aln_core] print alignments... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa samse -n 60000 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporTPsUCl/RasA7QvfMxl1EMUew4PF.sa /tmp/crisporTPsUCl/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.500 sec; CPU: 0.146 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - filter - Removing matches without a PAM motif
+
+real	0m0.164s
+user	0m0.004s
+sys	0m0.016s
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - genes - Annotating matches with genes
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - done - Job completed
+INFO:root:guide info written to /var/www/html/temp/230522_13_51_46_out.tsv
+
+INFO:root:230522_13_57_01
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/hg38test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:
+INFO:root:INFO:root: * running on sequence 'chromosome:GRCh38:16:67846953:67846986:1', guideLen=20, seqLen=34
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - bwasw - Searching genome for one 100% identical match to input sequence
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[bsw2_aln] read 1 sequences/pairs (34 bp) ...
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa bwasw -T 20 /var/www/html/genomes/hg38/hg38.fa /tmp/primer3Ini6rAHQ.txt
+[main] Real time: 985.673 sec; CPU: 570.448 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - effScores - Calculating guide efficiency scores
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - outcome - Calculating editing outcomes
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2645: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+INFO:root:Wrote eff scores to /tmp/crisporxzJ2ga/qx8BmCYc7lpdmeVjOtTG.effScores.tab
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - bwa - Alignment of potential guides, mismatches <= 4
+[bwa_aln_core] calculate SA coordinate... 132.37 sec
+[bwa_aln_core] write to the disk... 0.01 sec
+[bwa_aln_core] 4 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 /var/www/html/genomes/hg38/hg38.fa /tmp/crisporxzJ2ga/qx8BmCYc7lpdmeVjOtTG.fa
+[main] Real time: 980.652 sec; CPU: 507.930 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - saiToBed - Converting alignments
+[bwa_aln_core] convert to sequence coordinate... 683.38 sec
+[bwa_aln_core] refine gapped alignments... 89.07 sec
+[bwa_aln_core] print alignments... 0.07 sec
+[bwa_aln_core] 4 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa samse -n 60000 /var/www/html/genomes/hg38/hg38.fa /tmp/crisporxzJ2ga/qx8BmCYc7lpdmeVjOtTG.sa /tmp/crisporxzJ2ga/qx8BmCYc7lpdmeVjOtTG.fa
+[main] Real time: 2257.217 sec; CPU: 772.647 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - filter - Removing matches without a PAM motif
+
+real	0m52.370s
+user	0m0.256s
+sys	0m2.257s
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - genes - Annotating matches with genes
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - done - Job completed
+INFO:root:Writing saturating mutagenesis oligos to /var/www/html/temp/SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_satMutOligos.tsv
+INFO:root:Writing primers to /var/www/html/temp/SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_ontargetPrimers.tsv
+INFO:root:Writing amplicons to /var/www/html/temp/SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_ontargetAmplicons.tsv
+INFO:root:Writing guide sequences to /var/www/html/temp/SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_targetSeqs.tsv
+INFO:root:guide info written to /var/www/html/temp/230522_13_57_01_out.tsv
+INFO:root:off-target info written to /var/www/html/temp/230522_13_57_01_offtargets.tsv
+
+INFO:root:230522_16_57_39
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/hg38test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:230522_17_02_39
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/hg38test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:230522_17_04_41
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/hg38test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:230522_17_07_55
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/hg38test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:230522_17_08_22
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/hg38test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:230522_17_08_40
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/hg38test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:230522_17_10_34
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/hg38test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:230522_17_11_16
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/hg38test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:230522_19_46_22
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/sacCer3test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:
+INFO:root:INFO:root: * running on sequence 'sacCer3 chrI:766-947 sense strand', guideLen=20, seqLen=182
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwasw - Searching genome for one 100% identical match to input sequence
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[bsw2_aln] read 1 sequences/pairs (182 bp) ...
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa bwasw -T 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/primer3IncReh2Y.txt
+[main] Real time: 0.971 sec; CPU: 0.721 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - effScores - Calculating guide efficiency scores
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - outcome - Calculating editing outcomes
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2645: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+INFO:root:Wrote eff scores to /tmp/crisporkHrUM6/RasA7QvfMxl1EMUew4PF.effScores.tab
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwa - Alignment of potential guides, mismatches <= 4
+[bwa_aln_core] calculate SA coordinate... 0.13 sec
+[bwa_aln_core] write to the disk... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporkHrUM6/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.261 sec; CPU: 0.231 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - saiToBed - Converting alignments
+[bwa_aln_core] convert to sequence coordinate... 0.06 sec
+[bwa_aln_core] refine gapped alignments... 0.00 sec
+[bwa_aln_core] print alignments... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa samse -n 60000 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporkHrUM6/RasA7QvfMxl1EMUew4PF.sa /tmp/crisporkHrUM6/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.168 sec; CPU: 0.080 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - filter - Removing matches without a PAM motif
+
+real	0m0.123s
+user	0m0.009s
+sys	0m0.029s
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - genes - Annotating matches with genes
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - done - Job completed
+INFO:root:guide info written to /var/www/html/temp/230522_19_46_22sacCer3test.fa_out.tsv
+
+INFO:root:230523_22_32_25
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/hg38test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:
+INFO:root:INFO:root: * running on sequence 'chromosome:GRCh38:16:67846953:67846986:1', guideLen=20, seqLen=34
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - bwasw - Searching genome for one 100% identical match to input sequence
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[bsw2_aln] read 1 sequences/pairs (34 bp) ...
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa bwasw -T 20 /var/www/html/genomes/hg38/hg38.fa /tmp/primer3InaJYZOv.txt
+[main] Real time: 775.634 sec; CPU: 610.125 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - effScores - Calculating guide efficiency scores
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - outcome - Calculating editing outcomes
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2645: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+INFO:root:Wrote eff scores to /tmp/crisporPmkMoe/qx8BmCYc7lpdmeVjOtTG.effScores.tab
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - bwa - Alignment of potential guides, mismatches <= 4
+[bwa_aln_core] calculate SA coordinate... 405.13 sec
+[bwa_aln_core] write to the disk... 0.11 sec
+[bwa_aln_core] 4 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 /var/www/html/genomes/hg38/hg38.fa /tmp/crisporPmkMoe/qx8BmCYc7lpdmeVjOtTG.fa
+[main] Real time: 1028.890 sec; CPU: 875.093 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - saiToBed - Converting alignments
+[bwa_aln_core] convert to sequence coordinate... 1193.05 sec
+[bwa_aln_core] refine gapped alignments... 60.27 sec
+[bwa_aln_core] print alignments... 0.03 sec
+[bwa_aln_core] 4 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa samse -n 60000 /var/www/html/genomes/hg38/hg38.fa /tmp/crisporPmkMoe/qx8BmCYc7lpdmeVjOtTG.sa /tmp/crisporPmkMoe/qx8BmCYc7lpdmeVjOtTG.fa
+[main] Real time: 1412.892 sec; CPU: 1253.508 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - filter - Removing matches without a PAM motif
+
+real	0m41.441s
+user	0m0.212s
+sys	0m3.808s
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - genes - Annotating matches with genes
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - done - Job completed
+INFO:root:Writing saturating mutagenesis oligos to /var/www/html/temp/230523_22_32_25_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_satMutOligos.tsv
+INFO:root:Writing primers to /var/www/html/temp/230523_22_32_25_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_ontargetPrimers.tsv
+INFO:root:Writing amplicons to /var/www/html/temp/230523_22_32_25_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_ontargetAmplicons.tsv
+INFO:root:Writing guide sequences to /var/www/html/temp/230523_22_32_25_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_targetSeqs.tsv
+INFO:root:guide info written to /var/www/html/temp/230523_22_32_25_hg38test.fa_out.tsv
+INFO:root:off-target info written to /var/www/html/temp/230523_22_32_25_hg38test.fa_offtargets.tsv
+INFO:root:230525_00_13_23
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/hg38test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:python /var/www/html/crispor.py hg38 /var/www/html/temp/hg38test.fa /var/www/html/temp/230525_00_13_23_hg38test.fa_out.tsv -o /var/www/html/temp/230525_00_13_23_hg38test.fa_offtargets.tsv --satMutDir=/var/www/html/temp/230525_00_13_23_hg38test.fa_SATMUTDIR
+INFO:root:
+INFO:root:INFO:root: * running on sequence 'chromosome:GRCh38:16:67846953:67846986:1', guideLen=20, seqLen=34
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - bwasw - Searching genome for one 100% identical match to input sequence
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[bsw2_aln] read 1 sequences/pairs (34 bp) ...
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa bwasw -T 20 /var/www/html/genomes/hg38/hg38.fa /tmp/primer3InkWeh6n.txt
+[main] Real time: 1512.601 sec; CPU: 1008.621 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - effScores - Calculating guide efficiency scores
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - outcome - Calculating editing outcomes
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2645: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+INFO:root:Wrote eff scores to /tmp/crisporIwAJPE/qx8BmCYc7lpdmeVjOtTG.effScores.tab
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - bwa - Alignment of potential guides, mismatches <= 4
+[bwa_aln_core] calculate SA coordinate... 261.85 sec
+[bwa_aln_core] write to the disk... 0.00 sec
+[bwa_aln_core] 4 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 /var/www/html/genomes/hg38/hg38.fa /tmp/crisporIwAJPE/qx8BmCYc7lpdmeVjOtTG.fa
+[main] Real time: 864.896 sec; CPU: 655.607 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - saiToBed - Converting alignments
+[bwa_aln_core] convert to sequence coordinate... 1425.73 sec
+[bwa_aln_core] refine gapped alignments... 95.94 sec
+[bwa_aln_core] print alignments... 0.01 sec
+[bwa_aln_core] 4 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa samse -n 60000 /var/www/html/genomes/hg38/hg38.fa /tmp/crisporIwAJPE/qx8BmCYc7lpdmeVjOtTG.sa /tmp/crisporIwAJPE/qx8BmCYc7lpdmeVjOtTG.fa
+[main] Real time: 1812.587 sec; CPU: 1521.749 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - filter - Removing matches without a PAM motif
+
+real	1m24.465s
+user	0m0.141s
+sys	0m3.099s
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - genes - Annotating matches with genes
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - done - Job completed
+INFO:root:Writing saturating mutagenesis oligos to /var/www/html/temp/230525_00_13_23_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_satMutOligos.tsv
+INFO:root:Writing primers to /var/www/html/temp/230525_00_13_23_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_ontargetPrimers.tsv
+INFO:root:Writing amplicons to /var/www/html/temp/230525_00_13_23_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_ontargetAmplicons.tsv
+INFO:root:Writing guide sequences to /var/www/html/temp/230525_00_13_23_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_targetSeqs.tsv
+INFO:root:guide info written to /var/www/html/temp/230525_00_13_23_hg38test.fa_out.tsv
+INFO:root:off-target info written to /var/www/html/temp/230525_00_13_23_hg38test.fa_offtargets.tsv
+
+INFO:root:In target data: analyses//230525_00_13_23_hg38test.fa_out.tsv
+INFO:root:Off target data: analyses//230525_00_13_23_hg38test.fa_offtargets.tsv
+INFO:root:Saturation data: analyses//230525_00_13_23_hg38test.fa_SATMUTDIR
+INFO:root:230525_21_33_09
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/hg38test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:python /var/www/html/crispor.py hg38 /var/www/html/temp/hg38test.fa /var/www/html/temp/230525_21_33_09_hg38test.fa_out.tsv -o /var/www/html/temp/230525_21_33_09_hg38test.fa_offtargets.tsv --satMutDir=/var/www/html/temp/230525_21_33_09_hg38test.fa_SATMUTDIR
+INFO:root:
+INFO:root:INFO:root: * running on sequence 'chromosome:GRCh38:16:67846953:67846986:1', guideLen=20, seqLen=34
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - bwasw - Searching genome for one 100% identical match to input sequence
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[bsw2_aln] read 1 sequences/pairs (34 bp) ...
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa bwasw -T 20 /var/www/html/genomes/hg38/hg38.fa /tmp/primer3InJ3NTC5.txt
+[main] Real time: 892.541 sec; CPU: 505.232 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - effScores - Calculating guide efficiency scores
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - outcome - Calculating editing outcomes
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2645: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+INFO:root:Wrote eff scores to /tmp/crispordDtAVw/qx8BmCYc7lpdmeVjOtTG.effScores.tab
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - bwa - Alignment of potential guides, mismatches <= 4
+[bwa_aln_core] calculate SA coordinate... 178.25 sec
+[bwa_aln_core] write to the disk... 0.02 sec
+[bwa_aln_core] 4 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 /var/www/html/genomes/hg38/hg38.fa /tmp/crispordDtAVw/qx8BmCYc7lpdmeVjOtTG.fa
+[main] Real time: 692.588 sec; CPU: 373.073 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - saiToBed - Converting alignments
+[bwa_aln_core] convert to sequence coordinate... 922.01 sec
+[bwa_aln_core] refine gapped alignments... 60.42 sec
+[bwa_aln_core] print alignments... 0.06 sec
+[bwa_aln_core] 4 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa samse -n 60000 /var/www/html/genomes/hg38/hg38.fa /tmp/crispordDtAVw/qx8BmCYc7lpdmeVjOtTG.sa /tmp/crispordDtAVw/qx8BmCYc7lpdmeVjOtTG.fa
+[main] Real time: 1176.068 sec; CPU: 982.582 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - filter - Removing matches without a PAM motif
+
+real	1m21.215s
+user	0m0.226s
+sys	0m2.723s
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - genes - Annotating matches with genes
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - done - Job completed
+INFO:root:Writing saturating mutagenesis oligos to /var/www/html/temp/230525_21_33_09_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_satMutOligos.tsv
+INFO:root:Writing primers to /var/www/html/temp/230525_21_33_09_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_ontargetPrimers.tsv
+INFO:root:Writing amplicons to /var/www/html/temp/230525_21_33_09_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_ontargetAmplicons.tsv
+INFO:root:Writing guide sequences to /var/www/html/temp/230525_21_33_09_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_targetSeqs.tsv
+INFO:root:guide info written to /var/www/html/temp/230525_21_33_09_hg38test.fa_out.tsv
+INFO:root:off-target info written to /var/www/html/temp/230525_21_33_09_hg38test.fa_offtargets.tsv
+
+INFO:root:In target data: analyses//230525_21_33_09_hg38test.fa_out.tsv
+INFO:root:Off target data: analyses//230525_21_33_09_hg38test.fa_offtargets.tsv
+INFO:root:Saturation data: analyses//230525_21_33_09_hg38test.fa_SATMUTDIR
+INFO:root:Added snrScore to: analyses//230525_21_33_09_hg38test.fa_out.tsv
+INFO:root:230527_01_01_10
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/hg38test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:python /var/www/html/crispor.py hg38 /var/www/html/temp/hg38test.fa /var/www/html/temp/230527_01_01_10_hg38test.fa_out.tsv -o /var/www/html/temp/230527_01_01_10_hg38test.fa_offtargets.tsv --satMutDir=/var/www/html/temp/230527_01_01_10_hg38test.fa_SATMUTDIR
+INFO:root:
+INFO:root:INFO:root: * running on sequence 'chromosome:GRCh38:16:67846953:67846986:1', guideLen=20, seqLen=34
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - bwasw - Searching genome for one 100% identical match to input sequence
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[bsw2_aln] read 1 sequences/pairs (34 bp) ...
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa bwasw -T 20 /var/www/html/genomes/hg38/hg38.fa /tmp/primer3InZt_YqF.txt
+[main] Real time: 683.756 sec; CPU: 354.678 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - effScores - Calculating guide efficiency scores
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - outcome - Calculating editing outcomes
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2645: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+INFO:root:Wrote eff scores to /tmp/crisporqLexTQ/qx8BmCYc7lpdmeVjOtTG.effScores.tab
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - bwa - Alignment of potential guides, mismatches <= 4
+[bwa_aln_core] calculate SA coordinate... 384.96 sec
+[bwa_aln_core] write to the disk... 0.00 sec
+[bwa_aln_core] 4 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 /var/www/html/genomes/hg38/hg38.fa /tmp/crisporqLexTQ/qx8BmCYc7lpdmeVjOtTG.fa
+[main] Real time: 1042.617 sec; CPU: 658.697 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - saiToBed - Converting alignments
+[bwa_aln_core] convert to sequence coordinate... 1319.44 sec
+[bwa_aln_core] refine gapped alignments... 144.64 sec
+[bwa_aln_core] print alignments... 0.06 sec
+[bwa_aln_core] 4 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa samse -n 60000 /var/www/html/genomes/hg38/hg38.fa /tmp/crisporqLexTQ/qx8BmCYc7lpdmeVjOtTG.sa /tmp/crisporqLexTQ/qx8BmCYc7lpdmeVjOtTG.fa
+[main] Real time: 1835.073 sec; CPU: 1464.220 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - filter - Removing matches without a PAM motif
+
+real	1m16.579s
+user	0m0.065s
+sys	0m1.255s
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - genes - Annotating matches with genes
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - done - Job completed
+INFO:root:Writing saturating mutagenesis oligos to /var/www/html/temp/230527_01_01_10_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_satMutOligos.tsv
+INFO:root:Writing primers to /var/www/html/temp/230527_01_01_10_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_ontargetPrimers.tsv
+INFO:root:Writing amplicons to /var/www/html/temp/230527_01_01_10_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_ontargetAmplicons.tsv
+INFO:root:Writing guide sequences to /var/www/html/temp/230527_01_01_10_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_targetSeqs.tsv
+INFO:root:guide info written to /var/www/html/temp/230527_01_01_10_hg38test.fa_out.tsv
+INFO:root:off-target info written to /var/www/html/temp/230527_01_01_10_hg38test.fa_offtargets.tsv
+
+INFO:root:In target data: analyses/230527_01_01_10_hg38test.fa_out.tsv
+INFO:root:Off target data: analyses/230527_01_01_10_hg38test.fa_offtargets.tsv
+INFO:root:Saturation data: analyses/230527_01_01_10_hg38test.fa_SATMUTDIR
+INFO:root:Added snrScore to: analyses/230527_01_01_10_hg38test.fa_out.tsv
+INFO:root:230528_11_06_44
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/hg38test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:python /var/www/html/crispor.py hg38 /var/www/html/temp/hg38test.fa /var/www/html/temp/230528_11_06_44_hg38test.fa_out.tsv -o /var/www/html/temp/230528_11_06_44_hg38test.fa_offtargets.tsv --satMutDir=/var/www/html/temp/230528_11_06_44_hg38test.fa_SATMUTDIR
+INFO:root:
+INFO:root:INFO:root: * running on sequence 'chromosome:GRCh38:16:67846953:67846986:1', guideLen=20, seqLen=34
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - bwasw - Searching genome for one 100% identical match to input sequence
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[bsw2_aln] read 1 sequences/pairs (34 bp) ...
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa bwasw -T 20 /var/www/html/genomes/hg38/hg38.fa /tmp/primer3Inb7Vayp.txt
+[main] Real time: 994.949 sec; CPU: 567.417 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - effScores - Calculating guide efficiency scores
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - outcome - Calculating editing outcomes
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2645: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+INFO:root:Wrote eff scores to /tmp/crisporfbWbmr/qx8BmCYc7lpdmeVjOtTG.effScores.tab
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - bwa - Alignment of potential guides, mismatches <= 4
+[bwa_aln_core] calculate SA coordinate... 216.16 sec
+[bwa_aln_core] write to the disk... 0.02 sec
+[bwa_aln_core] 4 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 /var/www/html/genomes/hg38/hg38.fa /tmp/crisporfbWbmr/qx8BmCYc7lpdmeVjOtTG.fa
+[main] Real time: 793.631 sec; CPU: 441.160 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - saiToBed - Converting alignments
+[bwa_aln_core] convert to sequence coordinate... 960.36 sec
+[bwa_aln_core] refine gapped alignments... 120.21 sec
+[bwa_aln_core] print alignments... 0.10 sec
+[bwa_aln_core] 4 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa samse -n 60000 /var/www/html/genomes/hg38/hg38.fa /tmp/crisporfbWbmr/qx8BmCYc7lpdmeVjOtTG.sa /tmp/crisporfbWbmr/qx8BmCYc7lpdmeVjOtTG.fa
+[main] Real time: 1290.311 sec; CPU: 1080.801 sec
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - filter - Removing matches without a PAM motif
+
+real	0m52.020s
+user	0m0.152s
+sys	0m2.127s
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - genes - Annotating matches with genes
+INFO:root:Progress qx8BmCYc7lpdmeVjOtTG - done - Job completed
+INFO:root:Writing saturating mutagenesis oligos to /var/www/html/temp/230528_11_06_44_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_satMutOligos.tsv
+INFO:root:Writing primers to /var/www/html/temp/230528_11_06_44_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_ontargetPrimers.tsv
+INFO:root:Writing amplicons to /var/www/html/temp/230528_11_06_44_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_ontargetAmplicons.tsv
+INFO:root:Writing guide sequences to /var/www/html/temp/230528_11_06_44_hg38test.fa_SATMUTDIR/chromosome:GRCh38:16:67846953:67846986:1_targetSeqs.tsv
+INFO:root:guide info written to /var/www/html/temp/230528_11_06_44_hg38test.fa_out.tsv
+INFO:root:off-target info written to /var/www/html/temp/230528_11_06_44_hg38test.fa_offtargets.tsv
+
+INFO:root:In target data: analyses/230528_11_06_44_hg38test.fa_out.tsv
+INFO:root:Off target data: analyses/230528_11_06_44_hg38test.fa_offtargets.tsv
+INFO:root:Saturation data: analyses/230528_11_06_44_hg38test.fa_SATMUTDIR
+INFO:root:Added snrScore to: analyses/230528_11_06_44_hg38test.fa_out.tsv
+INFO:root:Added designtable: analyses//230528_11_06_44_hg38test.fa_designtable.tsv
+INFO:root:Done!
+
+INFO:root:230529_22_54_50
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/test.bed'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:python /var/www/html/crispor.py hg38 /var/www/html/temp/PL00091_00_EX_SPLICED.bed /var/www/html/temp/230529_22_54_50_PL00091_00_EX_SPLICED.bed_out.tsv -o /var/www/html/temp/230529_22_54_50_PL00091_00_EX_SPLICED.bed_offtargets.tsv --satMutDir=/var/www/html/temp/230529_22_54_50_PL00091_00_EX_SPLICED.bed_SATMUTDIR
+# Note: The bed analysis was interrupted and the 1st set of bed files recovered manually.
+
+INFO:root:230530_11_26_17
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/sacCer3test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:python /var/www/html/crispor.py sacCer3 /var/www/html/temp/sacCer3test.fa /var/www/html/temp/230530_11_26_17_sacCer3test.fa_out.tsv
+INFO:root:
+INFO:root:INFO:root: * running on sequence 'sacCer3 chrI:766-947 sense strand', guideLen=20, seqLen=182
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwasw - Searching genome for one 100% identical match to input sequence
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[bsw2_aln] read 1 sequences/pairs (182 bp) ...
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa bwasw -T 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/primer3Inet8paA.txt
+[main] Real time: 2.139 sec; CPU: 1.480 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - effScores - Calculating guide efficiency scores
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - outcome - Calculating editing outcomes
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2645: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+INFO:root:Wrote eff scores to /tmp/crisporRV7vWV/RasA7QvfMxl1EMUew4PF.effScores.tab
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwa - Alignment of potential guides, mismatches <= 4
+[bwa_aln_core] calculate SA coordinate... 0.07 sec
+[bwa_aln_core] write to the disk... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporRV7vWV/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.121 sec; CPU: 0.108 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - saiToBed - Converting alignments
+[bwa_aln_core] convert to sequence coordinate... 0.10 sec
+[bwa_aln_core] refine gapped alignments... 0.03 sec
+[bwa_aln_core] print alignments... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa samse -n 60000 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporRV7vWV/RasA7QvfMxl1EMUew4PF.sa /tmp/crisporRV7vWV/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.153 sec; CPU: 0.144 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - filter - Removing matches without a PAM motif
+
+real	0m0.152s
+user	0m0.020s
+sys	0m0.042s
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - genes - Annotating matches with genes
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - done - Job completed
+INFO:root:guide info written to /var/www/html/temp/230530_11_26_17_sacCer3test.fa_out.tsv
+
