@@ -1,10 +1,10 @@
 # CRISPR-Drawr - a CRISPR design tool
 
 ## User instructions
-CRISPR-Drawr suggest guides and primers, and conveniently output design tables with ranks using specificity scores for on- and offtarget effects.
+CRISPR-Drawr suggests guides and primers, and conveniently output design tables with ranks using specificity scores for on- and offtarget effects.
 
-CRISPR-Drawr uses the CRISPOR package for Virtualbox, see http://crispor.tefor.net/downloads/ . To download and run hg38 analyses at leat 8 GB RAM is recommended.
-You run CRISPR-Drawr from the commandline.
+CRISPR-Drawr uses the CRISPOR package for Virtualbox, see http://crispor.tefor.net/downloads/. To download and run hg38 analyses at least 8 GB RAM is recommended.
+You run CRISPR-Drawr from the command line.
 
 ## Software licenses
 Note that CRISPOR usage is free only for academic or non-profit organisations.
