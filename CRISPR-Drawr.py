@@ -168,7 +168,9 @@ def get_guides_primers(**kwargs):
 
         # 2. Run command
         # For tests we run sacCer3    
-        # _stdin, _stdout, _stderr = ssh_client.exec_command('python /var/www/html/crispor.py sacCer3 ' +base_path+'/'+fname+' '+out_file)
+        #  cmd_text = 'python /var/www/html/crispor.py sacCer3 '\
+        #       +guest_in_path+' '\
+        #       +guest_out_path
         cmd_text = 'python /var/www/html/crispor.py hg38 '\
             +guest_in_path+' '\
             +guest_out_path+' '\
