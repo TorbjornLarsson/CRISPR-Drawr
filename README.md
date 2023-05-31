@@ -22,4 +22,4 @@ Finally run python.py with something like:
   
 Follow the CRISPOR download and installation instructions. Open the machine settings, go to the System tabs and set the base memory to no less than 6200 MB and the number of CPUs to 2. G to the Network tab, then to Advanced/Port Forwarding and put a space in the ssh Host IP to free that setting. Finally open port 2222 in your firewall.
 
-When you start your virtual machine in Virtualbox, CRISPR-Drawr will manage to work against that machine if you are using eduroam wifi. If you have other LAN settings you may have to find out your ipv4 adress by opening a terminal and do ifconfig (on linux) or ipconfig /all (on windows).
+When you start your virtual machine in Virtualbox, CRISPR-Drawr will manage to work against that machine if you are using eduroam wifi. If you have other LAN settings you may have to find out your ipv4 address by opening a terminal and do ifconfig (on linux) or ipconfig /all (on windows).
