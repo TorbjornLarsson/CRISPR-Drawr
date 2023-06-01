@@ -24,20 +24,20 @@ Follow the CRISPOR download and installation instructions. Open the machine sett
 
 When you start your virtual machine in Virtualbox, CRISPR-Drawr will manage to work against that machine if you are using eduroam wifi. If you have other LAN settings you may have to find out your IPv4 address by opening a terminal and do ifconfig (on linux) or ipconfig /all (on windows).
 
-There is a crispor.py bug in the current download version that needs to be fixed. SSH to port 2222 on your IPv4 address: 
+There is a crispor.py bug in the current download version that needs to be fixed. SSH to port 2222 on your IPv4 address:  
 `ssh crispor@{IPv4 address} -p 2222, password \"crispor\"`  
-Then navigate to the crispor.py directory:
+Then navigate to the crispor.py directory:  
 `cd /var/www/html`  
-The installation has a nano editor that can be used for the bug fix.
-`sudo nano crispor.py, password "crispor"`
-Navigate to line number 6903 by a corntrol-key sequence:
-`CTRL + -`, line number "6903" -->
-Add two lines after 6903, minding the same start position as that line as in Python conventiok:
-`score = "0"`
-`strand = "+"`
-Save the file with a control-key sequences:
-`CTRL + X`, Save modified buffer? "Yes"
+The installation has a nano editor that can be used for the bug fix.  
+`sudo nano crispor.py, password "crispor"`  
+Navigate to line number 6903 by a corntrol-key sequence:  
+`CTRL + -`, line number "6903"  
+Add two lines after 6903, minding the same start position as that line as in Python conventiok:  
+`score = "0"`  
+`strand = "+"`  
+Save the file with a control-key sequences:  
+`CTRL + X`, Save modified buffer? "Yes"  
 
-CRISPR-Drawr default is the human hg38 genome. You can perform the ~ 1 h download by navigating to the download tool and ask for the hg38 genome to be put in the /var/www/html/genomes/ directory:
-`cd /var/www/html/tools`
-`crisprDownloadGenome hg38`
+CRISPR-Drawr default is the human hg38 genome. You can perform the ~ 1 h download by navigating to the download tool and ask for the hg38 genome to be put in the /var/www/html/genomes/ directory:  
+`cd /var/www/html/tools`  
+`crisprDownloadGenome hg38`  
