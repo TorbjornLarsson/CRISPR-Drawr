@@ -31,12 +31,12 @@ Then navigate to the crispor.py directory:
 The installation has a nano editor that can be used for the bug fix.  
 `sudo nano crispor.py, password "crispor"`  
 Navigate to line number 6903 by a corntrol-key sequence:  
-`CTRL + -`, line number "6903"  
+`CTRL + -, line number "6903"`  
 Add two lines after 6903, minding the same start position as that line as in Python conventiok:  
 `score = "0"`  
 `strand = "+"`  
 Save the file with a control-key sequences:  
-`CTRL + X`, Save modified buffer? "Yes"  
+`CTRL + X, Save modified buffer? "Yes"`  
 
 CRISPR-Drawr default is the human hg38 genome. You can perform the ~ 1 h download by navigating to the download tool and ask for the hg38 genome to be put in the /var/www/html/genomes/ directory:  
 `cd /var/www/html/tools`  
