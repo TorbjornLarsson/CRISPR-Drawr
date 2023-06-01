@@ -25,7 +25,7 @@ Follow the CRISPOR download and installation instructions. Open the machine sett
 When you start your virtual machine in Virtualbox, CRISPR-Drawr will manage to work against that machine if you are using eduroam wifi. If you have other LAN settings you may have to find out your IPv4 address by opening a terminal and do ifconfig (on linux) or ipconfig /all (on windows).
 
 There is a crispor.py bug in the current download version that needs to be fixed. SSH to port 2222 on your IPv4 address: 
-'ssh crispor@{IPv4 address} -p 2222, password \"crispor\"'
+`ssh crispor@{IPv4 address} -p 2222, password \"crispor\"`
 Then navigate to the crispor.py directory:
 'cd /var/www/html'
 The installation has a nano editor that can be used for the bug fix.
