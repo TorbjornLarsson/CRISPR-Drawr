@@ -737,3 +737,137 @@ INFO:root:Progress RasA7QvfMxl1EMUew4PF - genes - Annotating matches with genes
 INFO:root:Progress RasA7QvfMxl1EMUew4PF - done - Job completed
 INFO:root:guide info written to /var/www/html/temp/230530_11_26_17_sacCer3test.fa_out.tsv
 
+INFO:root:230608_17_50_03
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/test.bed'}
+INFO:root:230608_19_02_54
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/sacCer3test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:python /var/www/html/crispor.py sacCer3 /var/www/html/temp/sacCer3test.fa /var/www/html/temp/230608_19_02_54_sacCer3test.fa_out.tsv
+INFO:root:
+INFO:root:INFO:root: * running on sequence 'sacCer3 chrI:766-947 sense strand', guideLen=20, seqLen=182
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwasw - Searching genome for one 100% identical match to input sequence
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[bsw2_aln] read 1 sequences/pairs (182 bp) ...
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa bwasw -T 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/primer3In3FGPZM.txt
+[main] Real time: 7.540 sec; CPU: 4.430 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - effScores - Calculating guide efficiency scores
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - outcome - Calculating editing outcomes
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2645: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+INFO:root:Wrote eff scores to /tmp/crisporv99pKe/RasA7QvfMxl1EMUew4PF.effScores.tab
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwa - Alignment of potential guides, mismatches <= 4
+[bwa_aln_core] calculate SA coordinate... 0.08 sec
+[bwa_aln_core] write to the disk... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporv99pKe/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.158 sec; CPU: 0.148 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - saiToBed - Converting alignments
+[bwa_aln_core] convert to sequence coordinate... 1.02 sec
+[bwa_aln_core] refine gapped alignments... 0.00 sec
+[bwa_aln_core] print alignments... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa samse -n 60000 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporv99pKe/RasA7QvfMxl1EMUew4PF.sa /tmp/crisporv99pKe/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 1.115 sec; CPU: 1.021 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - filter - Removing matches without a PAM motif
+
+real	0m0.249s
+user	0m0.000s
+sys	0m0.034s
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - genes - Annotating matches with genes
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - done - Job completed
+INFO:root:guide info written to /var/www/html/temp/230608_19_02_54_sacCer3test.fa_out.tsv
+
+INFO:root:230608_19_07_49
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/sacCer3test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:python /var/www/html/crispor.py sacCer3 /var/www/html/temp/sacCer3test.fa /var/www/html/temp/230608_19_07_49_sacCer3test.fa_out.tsv
+INFO:root:
+INFO:root:INFO:root: * running on sequence 'sacCer3 chrI:766-947 sense strand', guideLen=20, seqLen=182
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwasw - Searching genome for one 100% identical match to input sequence
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[bsw2_aln] read 1 sequences/pairs (182 bp) ...
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa bwasw -T 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/primer3In43ghkp.txt
+[main] Real time: 1.662 sec; CPU: 0.750 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - effScores - Calculating guide efficiency scores
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - outcome - Calculating editing outcomes
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2645: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+INFO:root:Wrote eff scores to /tmp/crispors9GxOn/RasA7QvfMxl1EMUew4PF.effScores.tab
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwa - Alignment of potential guides, mismatches <= 4
+[bwa_aln_core] calculate SA coordinate... 0.07 sec
+[bwa_aln_core] write to the disk... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crispors9GxOn/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.108 sec; CPU: 0.096 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - saiToBed - Converting alignments
+[bwa_aln_core] convert to sequence coordinate... 0.15 sec
+[bwa_aln_core] refine gapped alignments... 0.00 sec
+[bwa_aln_core] print alignments... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa samse -n 60000 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crispors9GxOn/RasA7QvfMxl1EMUew4PF.sa /tmp/crispors9GxOn/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.258 sec; CPU: 0.154 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - filter - Removing matches without a PAM motif
+
+real	0m0.156s
+user	0m0.026s
+sys	0m0.073s
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - genes - Annotating matches with genes
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - done - Job completed
+INFO:root:guide info written to /var/www/html/temp/230608_19_07_49_sacCer3test.fa_out.tsv
+
+INFO:root:230608_19_08_51
+INFO:root:get_guides_primers
+INFO:root:{'o': 'analyses/', 'infile': 'analyses/sacCer3test.fa'}
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_6.6.1p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:root:python /var/www/html/crispor.py sacCer3 /var/www/html/temp/sacCer3test.fa /var/www/html/temp/230608_19_08_51_sacCer3test.fa_out.tsv
+INFO:root:
+INFO:root:INFO:root: * running on sequence 'sacCer3 chrI:766-947 sense strand', guideLen=20, seqLen=182
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwasw - Searching genome for one 100% identical match to input sequence
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[bsw2_aln] read 1 sequences/pairs (182 bp) ...
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa bwasw -T 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/primer3InE8gVNR.txt
+[main] Real time: 0.451 sec; CPU: 0.368 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - effScores - Calculating guide efficiency scores
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - outcome - Calculating editing outcomes
+/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py:2645: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  VisibleDeprecationWarning)
+INFO:root:Wrote eff scores to /tmp/crisporlXedN1/RasA7QvfMxl1EMUew4PF.effScores.tab
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - bwa - Alignment of potential guides, mismatches <= 4
+[bwa_aln_core] calculate SA coordinate... 0.03 sec
+[bwa_aln_core] write to the disk... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporlXedN1/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.160 sec; CPU: 0.137 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - saiToBed - Converting alignments
+[bwa_aln_core] convert to sequence coordinate... 0.07 sec
+[bwa_aln_core] refine gapped alignments... 0.00 sec
+[bwa_aln_core] print alignments... 0.00 sec
+[bwa_aln_core] 7 sequences have been processed.
+[main] Version: 0.7.15-r1140
+[main] CMD: /var/www/html/bin/Linux/bwa samse -n 60000 /var/www/html/genomes/sacCer3/sacCer3.fa /tmp/crisporlXedN1/RasA7QvfMxl1EMUew4PF.sa /tmp/crisporlXedN1/RasA7QvfMxl1EMUew4PF.fa
+[main] Real time: 0.082 sec; CPU: 0.075 sec
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - filter - Removing matches without a PAM motif
+
+real	0m0.064s
+user	0m0.015s
+sys	0m0.011s
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - genes - Annotating matches with genes
+INFO:root:Progress RasA7QvfMxl1EMUew4PF - done - Job completed
+INFO:root:guide info written to /var/www/html/temp/230608_19_08_51_sacCer3test.fa_out.tsv
+
+INFO:root:Done!
+
