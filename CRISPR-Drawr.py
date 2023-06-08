@@ -208,7 +208,7 @@ def get_guides_primers(**kwargs):
         _stdin, _stdout, _stderr = ssh_client.exec_command('rm '+guest_offtargets_path)
         _stdin, _stdout, _stderr = ssh_client.exec_command('rm -rf '+satmut_dir)
 
-        Close the client
+        # Close the client
         ssh_client.close()
 
         # Parse and add snr score to outfile
