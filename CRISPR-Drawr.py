@@ -22,7 +22,7 @@ now = datetime.datetime.now()
 tnow = now.strftime("%y%m%d_%H_%M_%S")
 
 ip_info = get_ip_info()[1]
-# For non-eduroam usres we need to pull the ipv4 adress
+# For non-eduroam users we need to pull the ipv4 adress
 # In windows it is easy, do ipconfig /all in a terninal.
 # ip_info = '192.168.1.69'
 
@@ -168,9 +168,10 @@ def get_guides_primers(**kwargs):
 
         # 2. Run command
         # For tests we run sacCer3    
-        #  cmd_text = 'python /var/www/html/crispor.py sacCer3 '\
-        #       +guest_in_path+' '\
-        #       +guest_out_path
+        # cmd_text = 'python /var/www/html/crispor.py sacCer3 '\
+        #     +guest_in_path+' '\
+        #     +guest_out_path
+        
         cmd_text = 'python /var/www/html/crispor.py hg38 '\
             +guest_in_path+' '\
             +guest_out_path+' '\
@@ -207,7 +208,7 @@ def get_guides_primers(**kwargs):
         _stdin, _stdout, _stderr = ssh_client.exec_command('rm '+guest_offtargets_path)
         _stdin, _stdout, _stderr = ssh_client.exec_command('rm -rf '+satmut_dir)
 
-        # Close the client
+        Close the client
         ssh_client.close()
 
         # Parse and add snr score to outfile
@@ -247,7 +248,6 @@ def get_guides_primers(**kwargs):
         # Then sort priority according to snr score.
         header_list = ['#seqId', 'guideId', 'targetSeq', 'snrScore']
         design_df = ontargets_df[header_list].copy()
-        #primers_df = pd.read_table(host_out_path+os.path.basename(satmut_dir)+'/'+tnow+'_'+fname+'_ontargetPrimers.tsv')
         # Using wildcard pattern matching for clarity
         primers_path = host_out_path+os.path.basename(satmut_dir)
         for file in os.listdir(primers_path):   
